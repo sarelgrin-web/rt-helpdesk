@@ -118,6 +118,40 @@
           "placement": "bottom"
         }
       }
+    },
+    {
+      "id": 5,
+      "title": "API P95 latency (self-study)",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 9,
+        "w": 24,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(helpdesk_http_request_duration_seconds_bucket{job=\"helpdesk\",environment=\"helpdesk\",route=~\"/api/.*\"}[5m])))",
+          "refId": "A",
+          "legendFormat": "P95 API latency"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
     }
   ],
   "templating": {
