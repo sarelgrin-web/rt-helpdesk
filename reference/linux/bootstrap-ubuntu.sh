@@ -22,7 +22,10 @@ if [[ "$role" == app ]]; then
   (cd "$work"; printf '%s  kubectl\n' "$(cat kubectl.sha256)" | sha256sum -c -)
   install -m 755 "$work/kubectl" /usr/local/bin/kubectl
   id deploy >/dev/null 2>&1 || useradd --create-home --shell /bin/bash deploy
-  apt-get install -y awscli
+  # Ubuntu 24.04 Noble no longer ships awscli in apt; install official AWS CLI v2.
+  curl -fsSL "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "$work/awscliv2.zip"
+  unzip -q "$work/awscliv2.zip" -d "$work"
+  "$work/aws/install" --update
 else
   apt-get install -y fontconfig openjdk-21-jre
   install -m 755 -d /etc/apt/keyrings

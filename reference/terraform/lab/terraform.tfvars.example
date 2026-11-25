@@ -1,7 +1,9 @@
-region = "eu-west-1"
-project = "rt-helpdesk"
-admin_cidr = "203.0.113.10/32"
-ssh_public_key = "ssh-ed25519 REPLACE_WITH_YOUR_PUBLIC_KEY"
-backup_bucket = "REPLACE-globally-unique-backup-bucket"
-budget_email = "REPLACE@example.com"
-monthly_budget_usd = 100
+region             = "eu-north-1"
+project            = "rt-helpdesk"
+admin_cidr         = "203.0.113.10/32"
+ssh_public_key     = "ssh-ed25519 REPLACE_WITH_YOUR_PUBLIC_KEY"
+backup_bucket      = "REPLACE-globally-unique-backup-bucket"
+ci_instance_type   = "c7i-flex.large"
+app_instance_type  = "m7i-flex.large"
+budget_email       = "REPLACE@example.com"
+monthly_budget_usd = 50
