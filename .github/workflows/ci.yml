@@ -50,3 +50,27 @@ jobs:
         with:
           name: test-results
           path: test-results/results.xml
+
+  terraform:
+    name: Terraform format and validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.17.2"
+      - name: Check Terraform formatting
+        run: terraform fmt -check -recursive reference/terraform
+      - name: Validate bootstrap Terraform configuration
+        working-directory: reference/terraform/bootstrap
+        run: |
+          terraform init -backend=false -input=false
+          terraform validate
+      - name: Validate lab Terraform configuration
+        working-directory: reference/terraform/lab
+        run: |
+          terraform init -backend=false -input=false
+          terraform validate
